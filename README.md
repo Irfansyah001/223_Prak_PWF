@@ -1,6 +1,3 @@
-Result modification for profile card:
-![image modification profile card](image.png)
-
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -24,7 +21,30 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Application Views
+
+### Login Page
+<p align="center">
+  <img src="screenshots/login.png" alt="Login Page" width="600">
+</p>
+
+### Register Page
+<p align="center">
+  <img src="screenshots/register.png" alt="Register Page" width="600">
+</p>
+
+### About Page
+<p align="center">
+  <img src="screenshots/about.png" alt="About Page" width="600">
+</p>
+
+## Profile Card Modification
+
+This project features an enhanced profile card with improved styling and functionality.
+
+<p align="center">
+  <img src="screenshots/profile-card.png" alt="Profile Card" width="600">
+</p>
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
