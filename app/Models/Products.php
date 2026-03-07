@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Products extends Model
 {
     use HasFactory;
 
@@ -25,6 +25,6 @@ class Product extends Model
 
     public function categories()
     {
-        return $this->hasMany(Category::class, 'product_id');
+        return $this->hasMany(Categories::class, 'product_id');
     }
 }

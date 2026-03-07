@@ -3,12 +3,12 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Product;
+use App\Models\Products;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Categories>
  */
-class CategoryFactory extends Factory
+class CategoriesFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -28,7 +28,7 @@ class CategoryFactory extends Factory
                 'Perabotan',
                 'Olahraga'
             ]),
-            'product_id' => Product::all()->random()->id,
+            'product_id' => Products::all()->random()->id,
         ];
     }
 }
