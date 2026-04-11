@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Products>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
  */
-class ProductsFactory extends Factory
+class ProductFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,10 +18,9 @@ class ProductsFactory extends Factory
     public function definition(): array
     {
         return [
-            //
             'user_id' => User::all()->random()->id,
             'name' => $this->faker->words(2, true),
-            'qty' => $this->faker->numberBetween(1, 100),
+            'quantity' => $this->faker->numberBetween(1, 100),
             'price' => $this->faker->numberBetween(10000, 100000),
         ];
     }
