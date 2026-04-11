@@ -2,7 +2,7 @@
 
 ## Admin
 
-### 1. Can see Product option in navbar, Export CSV button, Can see Product option in navbar, Export CSV button, and Admin can only delete there own data
+### 1. Login by Admin can see Product option in navbar, Export CSV button, and Admin can only delete there own data
 
 ![UI Login by Admin](../screenshots/loginAdmin.png)
 
