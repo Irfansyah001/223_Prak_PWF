@@ -18,6 +18,11 @@
                     <x-nav-link :href="route('about')" :active="request()->routeIs('about')">
                         {{ __('About') }}
                     </x-nav-link>
+                    @if(Auth::user()->role === 'admin')
+                        <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.*')">
+                            {{ __('Product') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -27,6 +32,16 @@
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
+
+                            @if(Auth::user()->role === 'admin')
+                                <span class="ms-2 inline-flex items-center px-1.5 py-0.5 rounded text-xs font-semibold bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300">
+                                    Admin
+                                </span>
+                            @else
+                                <span class="ms-2 inline-flex items-center px-1.5 py-0.5 rounded text-xs font-semibold bg-gray-100 text-gray-500 dark:bg-gray-700 dark:text-gray-400">
+                                    User
+                                </span>
+                            @endif
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -76,12 +91,28 @@
             <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
                 {{ __('About') }}
             </x-responsive-nav-link>
+            @if(Auth::user()->role === 'admin')
+                <x-responsive-nav-link :href="route('product.index')" :active="request()->routeIs('product.*')">
+                    {{ __('Product') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
+                <div class="font-medium text-base text-gray-800 dark:text-gray-200 flex items-center gap-2">
+                    {{ Auth::user()->name }}
+                    @if(Auth::user()->role === 'admin')
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-semibold bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300">
+                            Admin
+                        </span>
+                    @else
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-semibold bg-gray-100 text-gray-500 dark:bg-gray-700 dark:text-gray-400">
+                            User
+                        </span>
+                    @endif
+                </div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
             </div>
 
