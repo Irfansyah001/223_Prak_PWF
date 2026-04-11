@@ -22,15 +22,25 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    // Product Page
+    // Product Page — index bisa diakses semua user login
     Route::get('/product', [ProductController::class, 'index'])->name('product.index');
-    Route::post('/product', [ProductController::class, 'store'])->name('product.store');
-    Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
-    Route::get('/product/export', [ProductController::class, 'export'])->name('product.export');
+
+    // Route export — diamankan dengan Gate export-product (Kelas B)
+    Route::get('/product/export', [ProductController::class, 'export'])
+        ->middleware('can:export-product')
+        ->name('product.export');
+
+    // Route manajemen product — diamankan dengan Gate manage-product (hanya admin)
+    Route::middleware('can:manage-product')->group(function () {
+        Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
+        Route::post('/product', [ProductController::class, 'store'])->name('product.store');
+        Route::get('/product/edit/{product}', [ProductController::class, 'edit'])->name('product.edit');
+        Route::put('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+        Route::delete('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+    });
+
+    // Route show — harus paling bawah agar tidak menangkap /create, /export, /edit
     Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
-    Route::put('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
-    Route::get('/product/edit/{product}', [ProductController::class, 'edit'])->name('product.edit');
-    Route::delete('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
 });
 
 require __DIR__.'/auth.php';
