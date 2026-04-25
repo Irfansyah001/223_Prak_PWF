@@ -18,17 +18,18 @@ class CategoriesFactory extends Factory
     public function definition(): array
     {
         return [
-            //
-            'name' => $this->faker->randomElement([
+            'name' => $this->faker->unique()->randomElement([
                 'Elektronik',
                 'Fashion',
                 'Makanan & Minuman',
                 'Kesehatan',
                 'Otomotif',
                 'Perabotan',
-                'Olahraga'
+                'Olahraga',
+                'Kecantikan',
+                'Mainan',
+                'Buku & Alat Tulis',
             ]),
-            'product_id' => Product::all()->random()->id,
         ];
     }
 }
