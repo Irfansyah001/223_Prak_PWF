@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,16 @@ Route::middleware('auth')->group(function () {
 
     // Route show — harus paling bawah agar tidak menangkap /create, /export, /edit
     Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+});
+
+// Category routes — hanya admin (manage-category)
+Route::middleware(['auth', 'can:manage-category'])->group(function () {
+    Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
+    Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
+    Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::put('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
+    Route::delete('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
 });
 
 require __DIR__.'/auth.php';
