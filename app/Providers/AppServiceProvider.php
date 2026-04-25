@@ -28,6 +28,11 @@ class AppServiceProvider extends ServiceProvider
             return $user->role === 'admin';
         });
 
+        // Gate: hanya admin yang boleh mengakses menu & manajemen category
+        Gate::define('manage-category', function (User $user) {
+            return $user->role === 'admin';
+        });
+
         // Gate: hanya admin yang boleh mengakses fitur export product
         Gate::define('export-product', function (User $user) {
             return $user->role === 'admin';
