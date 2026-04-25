@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Categories;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
@@ -20,16 +22,19 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request)
     {
-        $product = Product::create($request->validated());
+        $data = $request->validated();
+        $data['user_id'] = Auth::id();
+
+        Product::create($data);
 
         return redirect()->route('product.index')->with('success', 'Product created successfully.');
     }
 
     public function create()
     {
-        $users = User::orderBy('name')->get();
+        $categories = Categories::orderBy('name')->get();
 
-        return view('product.create', compact('users'));
+        return view('product.create', compact('categories'));
     }
 
     public function show($id)
@@ -54,9 +59,9 @@ class ProductController extends Controller
     {
         $this->authorize('update', $product);
 
-        $users = User::orderBy('name')->get();
+        $categories = Categories::orderBy('name')->get();
 
-        return view('product.edit', compact('product', 'users'));
+        return view('product.edit', compact('product', 'categories'));
     }
 
     public function delete($id)
