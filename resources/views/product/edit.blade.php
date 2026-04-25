@@ -35,7 +35,7 @@
                         <div>
                             <label for="name"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Product Name <span class="text-red-500">*</span>
+                                Nama Produk <span class="text-red-500">*</span>
                             </label>
                             <input type="text" id="name" name="name"
                                 value="{{ old('name', $product->name) }}" placeholder="e.g. Wireless Headphones"
@@ -44,6 +44,30 @@
                                 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500
                                 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
                             @error('name')
+                                <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        {{-- Kategori --}}
+                        <div>
+                            <label for="category_id"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                Kategori
+                            </label>
+                            <select id="category_id" name="category_id"
+                                class="w-full px-4 py-2.5 rounded-lg border text-sm
+                                {{ $errors->has('category_id') ? 'border-red-400 bg-red-50 dark:bg-red-900/20' : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700' }}
+                                text-gray-900 dark:text-gray-100
+                                focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                                <option value="">-- Pilih Kategori --</option>
+                                @foreach ($categories as $cat)
+                                    <option value="{{ $cat->id }}"
+                                        {{ old('category_id', $product->category_id) == $cat->id ? 'selected' : '' }}>
+                                        {{ $cat->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
                                 <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
                             @enderror
                         </div>
@@ -82,30 +106,6 @@
                                     <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
                                 @enderror
                             </div>
-                        </div>
-
-                        {{-- User --}}
-                        <div>
-                            <label for="user_id"
-                                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Owner <span class="text-red-500">*</span>
-                            </label>
-                            <select id="user_id" name="user_id"
-                                class="w-full px-4 py-2.5 rounded-lg border text-sm
-                                {{ $errors->has('user_id') ? 'border-red-400 bg-red-50 dark:bg-red-900/20' : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700' }}
-                                text-gray-900 dark:text-gray-100
-                                focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
-                                <option value="">-- Select Owner --</option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}"
-                                        {{ old('user_id', $product->user_id) == $user->id ? 'selected' : '' }}>
-                                        {{ $user->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('user_id')
-                                <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
-                            @enderror
                         </div>
 
                         {{-- Actions --}}
