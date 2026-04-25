@@ -14,10 +14,10 @@ class UpdateProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'     => 'required|string|max:255',
-            'quantity' => 'required|integer|min:0',
-            'price'    => 'required|numeric|min:0',
-            'user_id'  => 'required|exists:users,id',
+            'name'        => 'required|string|max:255',
+            'quantity'    => 'required|integer|min:0',
+            'price'       => 'required|numeric|min:0',
+            'category_id' => 'nullable|exists:categories,id',
         ];
     }
 
@@ -36,8 +36,7 @@ class UpdateProductRequest extends FormRequest
             'price.numeric'     => 'Harga produk harus berupa angka yang valid.',
             'price.min'         => 'Harga produk tidak boleh bernilai negatif.',
 
-            'user_id.required'  => 'Pemilik produk wajib dipilih.',
-            'user_id.exists'    => 'Pemilik produk yang dipilih tidak valid.',
+            'category_id.exists' => 'Kategori yang dipilih tidak valid.',
         ];
     }
 }
