@@ -15,17 +15,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
+        // Admin
         User::factory()->create([
-            'name' => 'Irfansyah',
-            'email' => 'irfansyah@gmail.com',
+            'name'     => 'Irfansyah',
+            'email'    => 'irfansyah@gmail.com',
             'password' => bcrypt('password'),
-            'role' => 'admin',
+            'role'     => 'admin',
         ]);
 
-        User::factory(10)->create();
+        // User biasa
+        User::factory(5)->create([
+            'role' => 'user',
+        ]);
+
+        // Categories harus dibuat lebih dulu (products butuh category_id)
+        Categories::factory(7)->create();
+
+        // Products dengan category_id dari categories yang sudah ada
         Product::factory(20)->create();
-        Categories::factory(10)->create();
     }
 }
